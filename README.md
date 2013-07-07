@@ -11,6 +11,7 @@ Installation should be handled through Composer:
 
 ## Usage
 Usage is very simple with Benchmark:
+
     $benchmark = new Benchmark('MyProduct');
     $manager = new Manager();
     $manager->addBenchmark($benchmark);
