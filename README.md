@@ -5,22 +5,27 @@ PHP-Benchmark is intented to be used to compare libraries, or do small testing i
 
 ## Installation
 Installation should be handled through Composer:
-    "require": {
-        "dydro/benchmark": "dev-master"
-    }
+
+```json
+"require": {
+    "dydro/benchmark": "dev-master"
+}
+```
 
 ## Usage
 Usage is very simple with Benchmark:
 
-    $benchmark = new Benchmark('MyProduct');
-    $manager = new Manager();
-    $manager->addBenchmark($benchmark);
+```php
+$benchmark = new Benchmark('MyProduct');
+$manager = new Manager();
+$manager->addBenchmark($benchmark);
 
-    $benchmark->start();
-    ...do stuff...
-    $benchmark->stop();
+$benchmark->start();
+...do stuff...
+$benchmark->stop();
 
-    echo $manager->getResults('MyProduct test');
+echo $manager->getResults('MyProduct test');
+```
 
 ## Output
 Depending on the environment in which PHP is running (CLI or non-CLI) Benchmark will spit out different responses:
