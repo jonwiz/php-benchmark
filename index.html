@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>PHP-Benchmark by Dydro</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">PHP-Benchmark</h1>
+        <p class="header">A simple benchmarking utility that allows for comparisons</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/Dydro/php-benchmark/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/Dydro/php-benchmark/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/Dydro/php-benchmark">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/Dydro">Dydro</a></p>
+
+
+      </header>
+      <section>
+        <h1>
+<a name="php-benchmark" class="anchor" href="#php-benchmark"><span class="octicon octicon-link"></span></a>PHP-Benchmark</h1>
+
+<p>A comparison benchmarking utility</p>
+
+<p>PHP-Benchmark is intented to be used to compare libraries, or do small testing in your application</p>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>Installation should be handled through Composer:</p>
+
+<div class="highlight"><pre><span class="s2">"require"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="nt">"dydro/benchmark"</span><span class="p">:</span> <span class="s2">"dev-master"</span>
+<span class="p">}</span>
+</pre></div>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Usage is very simple with Benchmark:</p>
+
+<div class="highlight"><pre><span class="nv">$benchmark</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Benchmark</span><span class="p">(</span><span class="s1">'MyProduct'</span><span class="p">);</span>
+<span class="nv">$manager</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Manager</span><span class="p">();</span>
+<span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">addBenchmark</span><span class="p">(</span><span class="nv">$benchmark</span><span class="p">);</span>
+
+<span class="nv">$benchmark</span><span class="o">-&gt;</span><span class="na">start</span><span class="p">();</span>
+<span class="o">...</span><span class="k">do</span> <span class="nx">stuff</span><span class="o">...</span>
+<span class="nv">$benchmark</span><span class="o">-&gt;</span><span class="na">stop</span><span class="p">();</span>
+
+<span class="k">echo</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">getResults</span><span class="p">(</span><span class="s1">'MyProduct test'</span><span class="p">);</span>
+</pre></div>
+
+<h2>
+<a name="output" class="anchor" href="#output"><span class="octicon octicon-link"></span></a>Output</h2>
+
+<p>Depending on the environment in which PHP is running (CLI or non-CLI) Benchmark will spit out different responses:</p>
+
+<h3>
+<a name="cli" class="anchor" href="#cli"><span class="octicon octicon-link"></span></a>CLI</h3>
+
+<pre><code>+--------------------------------------------------------+
+|                                                        |
+|           BENCHMARK RESULTS -- 04.images.php           |
+|                                                        |
++-------------------+----------------+-------------------+
+|      PRODUCT      |    TIME (s)    |    MEMORY (kB)    |
++-------------------+----------------+-------------------+
+|       FPDF        |    0.01311     |       599.8       |
++-------------------+----------------+-------------------+
+|       TCPDF       |     0.4036     |     10946.85      |
++-------------------+----------------+-------------------+
+</code></pre>
+
+<h3>
+<a name="html" class="anchor" href="#html"><span class="octicon octicon-link"></span></a>HTML</h3>
+
+<pre><code>&lt;!doctype html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;BENCHMARK RESULTS -- 04.images.php&lt;/title&gt;
+        &lt;link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet"&gt;
+        &lt;style&gt;#dy-benchmark-results * {text-align: center;}&lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class="container"&gt;
+            &lt;div class="row"&gt;
+                &lt;div class="span12"&gt;
+                    &lt;table class="table table-striped table-hover table-bordered" id="dy-benchmark-results"&gt;
+                        &lt;thead&gt;
+                            &lt;tr&gt;
+                                &lt;th colspan="3"&gt;BENCHMARK RESULTS -- 04.images.php&lt;/th&gt;
+                            &lt;/tr&gt;
+                            &lt;tr&gt;
+                                &lt;th&gt;PRODUCT&lt;/th&gt;
+                                &lt;th&gt;TIME (s)&lt;/th&gt;
+                                &lt;th&gt;MEMORY (kB)&lt;/th&gt;
+                            &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;FPDF&lt;/td&gt;&lt;td&gt;&lt;span class="label label-success"&gt;0.01278&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class="label label-success"&gt;599.9&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;TCPDF&lt;/td&gt;&lt;td&gt;&lt;span class="label label-important"&gt;0.39344&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class="label label-important"&gt;10946.73&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
+  </body>
+</html>
