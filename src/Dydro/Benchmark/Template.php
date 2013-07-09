@@ -16,14 +16,24 @@ namespace Dydro\Benchmark;
  *
  * @package Dydro\Benchmark
  */
-interface Template
+abstract class Template
 {
     /**
-     * Gets the footer for display
+     * The rows for the table
      *
-     * @return string
+     * @var string
      */
-    public function getFooter();
+    protected $rows = '';
+
+    /**
+     * Adds data to the table
+     *
+     * @param string $name
+     * @param float $time
+     * @param float $memory
+     * @return void
+     */
+    abstract public function addRow($name, $time, $memory);
 
     /**
      * Gets the header for display
@@ -31,17 +41,7 @@ interface Template
      * @param string $title The title of the table
      * @return string
      */
-    public function getHeader($title);
-
-    /**
-     * Gets a row for display
-     *
-     * @param string $name
-     * @param float $time
-     * @param float $memory
-     * @return mixed
-     */
-    public function getRow($name, $time, $memory);
+    abstract public function getResults($title);
 
     /**
      * Makes the inputted text green
@@ -49,7 +49,7 @@ interface Template
      * @param string $text The text to make green
      * @return string
      */
-    public function green($text);
+    abstract public function green($text);
 
     /**
      * Makes the inputted text red
@@ -57,7 +57,7 @@ interface Template
      * @param string $text The text to make red
      * @return string
      */
-    public function red($text);
+    abstract public function red($text);
 
     /**
      * Makes the inputted text yellow
@@ -65,5 +65,5 @@ interface Template
      * @param string $text The text to make yellow
      * @return string
      */
-    public function yellow($text);
+    abstract public function yellow($text);
 }

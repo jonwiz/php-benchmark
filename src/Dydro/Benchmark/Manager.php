@@ -95,9 +95,6 @@ class Manager
             $template = new Html();
         }
 
-        // grab the header
-        $output = $template->getHeader($name);
-
         // go through each benchmark and color the results properly
         // this is for both time and memory
         // ...I could use variable variables here, but...nah.
@@ -134,12 +131,11 @@ class Manager
             }
 
             // save the row for this benchmark
-            $output .= $template->getRow($benchmark->getProductName(), $timeText, $memoryText);
+            $template->addRow($benchmark->getProductName(), $timeText, $memoryText);
         }
 
-        // get the footer of the display and send it back
-        $output .= $template->getFooter();
-        return $output;
+        // get the display and send it back;
+        return $template->getResults($name);
     }
 
     /**

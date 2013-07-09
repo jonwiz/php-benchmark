@@ -12,23 +12,15 @@
 namespace Dydro\Benchmark\Template;
 
 use Dydro\Benchmark\Template;
+use Symfony\Component\Console\Helper\TableHelper;
 
 /**
  * CLI Template for display
  *
  * @package Dydro\Benchmark\Template
  */
-class Cli implements Template
+class Cli extends Template
 {
-    /**
-     * Gets the footer for display
-     *
-     * @return string
-     */
-    public function getFooter()
-    {
-        return PHP_EOL;
-    }
 
     /**
      * Gets the header for display
@@ -36,7 +28,7 @@ class Cli implements Template
      * @param string $title The title of the table
      * @return string
      */
-    public function getHeader($title)
+    public function getResults($title)
     {
         $output = PHP_EOL;
         $output .= '+--------------------------------------------------------+' . PHP_EOL;
@@ -48,26 +40,27 @@ class Cli implements Template
         $output .= '|    ' . $this->bold('TIME (s)') . '    ';
         $output .= '|    ' . $this->bold('MEMORY (kB)') . '    |' . PHP_EOL;
         $output .= '+-------------------+----------------+-------------------+' . PHP_EOL;
+        $output .= $this->rows . PHP_EOL;
 
         return $output;
     }
 
     /**
-     * Gets a row for display
+     * Adds data to the table
      *
      * @param string $name
      * @param float $time
      * @param float $memory
-     * @return mixed
+     * @return void
      */
-    public function getRow($name, $time, $memory)
+    public function addRow($name, $time, $memory)
     {
         $output = '|' . str_pad($name, 19, ' ', STR_PAD_BOTH);
         $output .= '|' . str_pad($time, 25, ' ', STR_PAD_BOTH);
         $output .= '|' . str_pad($memory, 28, ' ', STR_PAD_BOTH) . '|' . PHP_EOL;
         $output .= '+-------------------+----------------+-------------------+' . PHP_EOL;
 
-        return $output;
+        $this->rows .= $output;
     }
 
     /**

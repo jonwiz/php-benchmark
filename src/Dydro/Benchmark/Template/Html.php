@@ -18,34 +18,15 @@ use Dydro\Benchmark\Template;
  *
  * @package Dydro\Benchmark\Template
  */
-class Html implements Template
+class Html extends Template
 {
-    /**
-     * Gets the footer for display
-     *
-     * @return string
-     */
-    public function getFooter()
-    {
-return <<<EOD
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
-
-EOD;
-    }
-
     /**
      * Gets the header for display
      *
      * @param string $title The title of the table
      * @return string
      */
-    public function getHeader($title)
+    public function getResults($title)
     {
 $output = <<<EOD
 <!doctype html>
@@ -71,6 +52,14 @@ $output = <<<EOD
                             </tr>
                         </thead>
                         <tbody>
+                            {$this->rows}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
 
 EOD;
 
@@ -78,16 +67,16 @@ EOD;
     }
 
     /**
-     * Gets a row for display
+     * Adds data to the table
      *
-     * @param string $name The product name
-     * @param float $time The time (must be colored already)
-     * @param float $memory The memory (must be colored already)
-     * @return mixed
+     * @param string $name
+     * @param float $time
+     * @param float $memory
+     * @return void
      */
-    public function getRow($name, $time, $memory)
+    public function addRow($name, $time, $memory)
     {
-        return "<tr><td>{$name}</td><td>{$time}</td><td>{$memory}</td></tr>";
+        $this->rows .= "<tr><td>{$name}</td><td>{$time}</td><td>{$memory}</td></tr>";
     }
 
     /**
