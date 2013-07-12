@@ -23,17 +23,45 @@ abstract class Template
      *
      * @var string
      */
-    protected $rows = '';
+    protected $rows = [];
 
     /**
      * Adds data to the table
      *
-     * @param string $name
-     * @param float $time
-     * @param float $memory
+     * @param Benchmark $benchmark
      * @return void
      */
-    abstract public function addRow($name, $time, $memory);
+    public function addRow(Benchmark $benchmark)
+    {
+        $this->rows[] = $benchmark;
+    }
+
+    /**
+     * Returns the colored version of the text based on the requested color code
+     *
+     * @param string $text
+     * @param int $color
+     * @return string
+     */
+    protected function getColoredText($text, $color)
+    {
+        switch ($color) {
+            case Manager::COLOR_GREEN:
+                $return = $this->green($text);
+                break;
+
+            case Manager::COLOR_YELLOW:
+                $return = $this->yellow($text);
+                break;
+
+            default:
+            case Manager::COLOR_RED:
+                $return = $this->red($text);
+                break;
+        }
+
+        return $return;
+    }
 
     /**
      * Gets the header for display

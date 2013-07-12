@@ -33,11 +33,18 @@ class Benchmark
     protected $endTime = 0;
 
     /**
-     * The name of the product to benchmark
+     * What color to make the memory measurement
+     *
+     * @var int
+     */
+    protected $memoryColor = Manager::COLOR_RED;
+
+    /**
+     * The name of this benchmark
      *
      * @var string
      */
-    protected $productName;
+    protected $name;
 
     /**
      * The memory usage at the start of the run
@@ -54,13 +61,20 @@ class Benchmark
     protected $startTime = 0;
 
     /**
+     * What color to make the time measurement
+     *
+     * @var int
+     */
+    protected $timeColor = Manager::COLOR_RED;
+
+    /**
      * Create a benchmark
      *
      * @param string $productName
      */
     public function __construct($productName)
     {
-        $this->productName = $productName;
+        $this->name = $productName;
     }
 
     /**
@@ -83,13 +97,23 @@ class Benchmark
     }
 
     /**
+     * Gets the memory color
+     *
+     * @return int
+     */
+    public function getMemoryColor()
+    {
+        return $this->memoryColor;
+    }
+
+    /**
      * Gets the product name
      *
      * @return string
      */
-    public function getProductName()
+    public function getName()
     {
-        return $this->productName;
+        return $this->name;
     }
 
     /**
@@ -100,6 +124,32 @@ class Benchmark
     public function getTime()
     {
         return round($this->endTime - $this->startTime, 5);
+    }
+
+    /**
+     * Gets the time color
+     *
+     * @return int
+     */
+    public function getTimeColor()
+    {
+        return $this->timeColor;
+    }
+
+    /**
+     * @param int $memoryColor
+     */
+    public function setMemoryColor($memoryColor)
+    {
+        $this->memoryColor = $memoryColor;
+    }
+
+    /**
+     * @param int $timeColor
+     */
+    public function setTimeColor($timeColor)
+    {
+        $this->timeColor = $timeColor;
     }
 
     /**

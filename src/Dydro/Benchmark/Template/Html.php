@@ -11,6 +11,7 @@
 
 namespace Dydro\Benchmark\Template;
 
+use Dydro\Benchmark\Benchmark;
 use Dydro\Benchmark\Template;
 
 /**
@@ -28,12 +29,24 @@ class Html extends Template
      */
     public function getResults($title)
     {
+        $rows = '';
+        /** @var Benchmark $row */
+        foreach ($this->rows as $row) {
+            // colorize the time
+            $timeText = $this->getColoredText($row->getTime(), $row->getTimeColor());
+
+            // colorize the memory usage
+            $memoryText = $this->getColoredText($row->getMemory(), $row->getMemoryColor());
+
+            // append an html row
+            $rows .= "<tr><td>{$row->getName()}</td><td>{$timeText}</td><td>{$memoryText}</td></tr>";
+        }
 $output = <<<EOD
 <!doctype html>
 <html>
     <head>
         <title>BENCHMARK RESULTS -- {$title}</title>
-        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <style>#dy-benchmark-results * {text-align: center;}</style>
     </head>
     <body>
@@ -43,7 +56,7 @@ $output = <<<EOD
                     <table class="table table-striped table-hover table-bordered" id="dy-benchmark-results">
                         <thead>
                             <tr>
-                                <th colspan="3">BENCHMARK RESULTS -- {$title}</th>
+                                <th colspan="3">{$title}</th>
                             </tr>
                             <tr>
                                 <th>PRODUCT</th>
@@ -52,7 +65,7 @@ $output = <<<EOD
                             </tr>
                         </thead>
                         <tbody>
-                            {$this->rows}
+                            {$rows}
                         </tbody>
                     </table>
                 </div>
@@ -60,23 +73,9 @@ $output = <<<EOD
         </div>
     </body>
 </html>
-
 EOD;
 
         return $output;
-    }
-
-    /**
-     * Adds data to the table
-     *
-     * @param string $name
-     * @param float $time
-     * @param float $memory
-     * @return void
-     */
-    public function addRow($name, $time, $memory)
-    {
-        $this->rows .= "<tr><td>{$name}</td><td>{$time}</td><td>{$memory}</td></tr>";
     }
 
     /**

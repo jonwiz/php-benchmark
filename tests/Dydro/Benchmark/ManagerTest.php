@@ -73,16 +73,15 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
         $results = $this->manager->getResults('Testaroo');
         // replace the colors so we can actually test
         $results = preg_replace('/\\033\[\d{1,2}m/m', '', $results);
-
 $expected = <<<EOD
 
-+--------------------------------------------------------+
-|                                                        |
-|             BENCHMARK RESULTS -- Testaroo              |
-|                                                        |
-+-------------------+----------------+-------------------+
-|      PRODUCT      |    TIME (s)    |    MEMORY (kB)    |
-+-------------------+----------------+-------------------+
++-----------------------------------------------+
+|                                               |
+|                   Testaroo                    |
+|                                               |
++---------------+---------------+---------------+
+|    PRODUCT    |   TIME (s)    |  MEMORY (kB)  |
++---------------+---------------+---------------+
 EOD;
 
         $this->assertStringStartsWith($expected, $results);
@@ -103,7 +102,7 @@ $expected = <<<EOD
 <html>
     <head>
         <title>BENCHMARK RESULTS -- Ach!</title>
-        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <style>#dy-benchmark-results * {text-align: center;}</style>
     </head>
     <body>
@@ -113,7 +112,7 @@ $expected = <<<EOD
                     <table class="table table-striped table-hover table-bordered" id="dy-benchmark-results">
                         <thead>
                             <tr>
-                                <th colspan="3">BENCHMARK RESULTS -- Ach!</th>
+                                <th colspan="3">Ach!</th>
                             </tr>
                             <tr>
                                 <th>PRODUCT</th>

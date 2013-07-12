@@ -53,7 +53,7 @@ class BenchmarkTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetProductName()
     {
-        $this->assertEquals('test', $this->benchmark->getProductName());
+        $this->assertEquals('test', $this->benchmark->getName());
     }
 
     /**

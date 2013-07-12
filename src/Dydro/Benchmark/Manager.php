@@ -100,38 +100,11 @@ class Manager
         // ...I could use variable variables here, but...nah.
         /** @var Benchmark $benchmark */
         foreach ($this->benchmarks as $benchmark) {
-            switch ($colors['time'][$benchmark->getProductName()]) {
-                case self::COLOR_GREEN:
-                    $timeText = $template->green($benchmark->getTime());
-                    break;
-
-                case self::COLOR_YELLOW:
-                    $timeText = $template->yellow($benchmark->getTime());
-                    break;
-
-                default:
-                case self::COLOR_RED:
-                    $timeText = $template->red($benchmark->getTime());
-                    break;
-            }
-
-            switch ($colors['memory'][$benchmark->getProductName()]) {
-                case self::COLOR_GREEN:
-                    $memoryText = $template->green($benchmark->getMemory());
-                    break;
-
-                case self::COLOR_YELLOW:
-                    $memoryText = $template->yellow($benchmark->getMemory());
-                    break;
-
-                default:
-                case self::COLOR_RED:
-                    $memoryText = $template->red($benchmark->getMemory());
-                    break;
-            }
+            $benchmark->setTimeColor($colors['time'][$benchmark->getName()]);
+            $benchmark->setMemoryColor($colors['memory'][$benchmark->getName()]);
 
             // save the row for this benchmark
-            $template->addRow($benchmark->getProductName(), $timeText, $memoryText);
+            $template->addRow($benchmark);
         }
 
         // get the display and send it back;
@@ -150,7 +123,7 @@ class Manager
 
         // short-circuit if we only have one thing to benchmark
         if (count($this->benchmarks) == 1) {
-            $name = $this->benchmarks[0]->getProductName();
+            $name = $this->benchmarks[0]->getName();
             $return['time'][$name] = self::COLOR_GREEN;
             $return['memory'][$name] = self::COLOR_GREEN;
 
@@ -164,8 +137,8 @@ class Manager
         // split them all out
         /** @var Benchmark $benchmark */
         foreach ($this->benchmarks as $benchmark) {
-            $times[$benchmark->getProductName()] = $benchmark->getTime();
-            $memories[$benchmark->getProductName()] = $benchmark->getMemory();
+            $times[$benchmark->getName()] = $benchmark->getTime();
+            $memories[$benchmark->getName()] = $benchmark->getMemory();
         }
 
         // sort them by value
