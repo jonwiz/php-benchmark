@@ -39,7 +39,7 @@ for ($k = 0; $k < 1000; $k++) $$k = $k;
 $c->stop();
 
 // get the results
-$dir = __DIR__ . '/out/';
+$dir = __DIR__ . '/output/';
 if (!is_dir($dir)) {
     mkdir($dir);
 }

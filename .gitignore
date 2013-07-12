@@ -19,4 +19,4 @@ composer.phar
 vendor
 
 # Generated samples
-sample/*/output/*.pdf
+sample/output/*
