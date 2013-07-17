@@ -137,6 +137,8 @@ class Benchmark
     }
 
     /**
+     * Sets the color of the memory
+     *
      * @param int $memoryColor
      */
     public function setMemoryColor($memoryColor)
@@ -145,6 +147,8 @@ class Benchmark
     }
 
     /**
+     * Sets the color of the time
+     *
      * @param int $timeColor
      */
     public function setTimeColor($timeColor)
