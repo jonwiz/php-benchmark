@@ -15,11 +15,11 @@ use Dydro\Benchmark\Benchmark;
 use Dydro\Benchmark\Template;
 
 /**
- * HTML Template for display
+ * HTML Fragment Template for display
  *
  * @package Dydro\Benchmark\Template
  */
-class Html extends Template
+class HtmlFragment extends Template
 {
     /**
      * Gets the results
@@ -42,37 +42,21 @@ class Html extends Template
             $rows .= "<tr><td>{$row->getName()}</td><td>{$timeText}</td><td>{$memoryText}</td></tr>";
         }
 $output = <<<EOD
-<!doctype html>
-<html>
-    <head>
-        <title>BENCHMARK RESULTS -- {$title}</title>
-        <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
-        <style>.dy-benchmark-results * {text-align: center;}</style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="row">
-                <div class="span12">
-                    <table class="table table-striped table-hover table-bordered dy-benchmark-results">
-                        <thead>
-                            <tr>
-                                <th colspan="3">{$title}</th>
-                            </tr>
-                            <tr>
-                                <th>PRODUCT</th>
-                                <th>TIME (s)</th>
-                                <th>MEMORY (kB)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {$rows}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
+<table class="table table-striped table-hover table-bordered dy-benchmark-results">
+    <thead>
+        <tr>
+            <th colspan="3">{$title}</th>
+        </tr>
+        <tr>
+            <th>PRODUCT</th>
+            <th>TIME (s)</th>
+            <th>MEMORY (kB)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {$rows}
+    </tbody>
+</table>
 EOD;
 
         return $output;

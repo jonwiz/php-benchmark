@@ -3,6 +3,9 @@ A comparison benchmarking utility
 
 PHP-Benchmark is intented to be used to compare libraries, or do small testing in your application
 
+[![Latest Stable Version](https://poser.pugx.org/dydro/benchmark/v/stable.png)](https://packagist.org/packages/dydro/benchmark)
+[![Build Status](https://travis-ci.org/Dydro/php-benchmark.png)](https://travis-ci.org/Dydro/php-benchmark)
+
 ## Installation
 Installation should be handled through Composer:
 

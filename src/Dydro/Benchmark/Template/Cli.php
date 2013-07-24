@@ -14,7 +14,6 @@ namespace Dydro\Benchmark\Template;
 use Dydro\Benchmark\Benchmark;
 use Dydro\Benchmark\Manager;
 use Dydro\Benchmark\Template;
-use Symfony\Component\Console\Helper\TableHelper;
 
 /**
  * CLI Template for display
@@ -25,7 +24,7 @@ class Cli extends Template
 {
 
     /**
-     * Gets the header for display
+     * Gets the results
      *
      * @param string $title The title of the table
      * @return string

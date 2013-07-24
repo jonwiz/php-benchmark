@@ -12,6 +12,7 @@
 namespace Dydro\Benchmark;
 use Dydro\Benchmark\Template\Cli;
 use Dydro\Benchmark\Template\Html;
+use Dydro\Benchmark\Template\HtmlFragment;
 
 /**
  * A class to manage multiple benchmarks
@@ -44,6 +45,11 @@ class Manager
      * Format results for HTML
      */
     const FORMAT_HTML = 'html';
+
+    /**
+     * Format results for HTML Fragment (<table>...</table>)
+     */
+    const FORMAT_HTML_FRAGMENT = 'html-fragment';
 
     /**
      * Benchmarks that we are watching
@@ -91,8 +97,12 @@ class Manager
         // create the template
         if ($format == self::FORMAT_CLI) {
             $template = new Cli();
-        } else {
+        } else if ($format == self::FORMAT_HTML) {
             $template = new Html();
+        } else if ($format == self::FORMAT_HTML_FRAGMENT) {
+            $template = new HtmlFragment();
+        } else {
+            throw new \Exception('Invalid output format specified.');
         }
 
         // go through each benchmark and color the results properly

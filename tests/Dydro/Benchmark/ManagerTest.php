@@ -103,13 +103,13 @@ $expected = <<<EOD
     <head>
         <title>BENCHMARK RESULTS -- Ach!</title>
         <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
-        <style>#dy-benchmark-results * {text-align: center;}</style>
+        <style>.dy-benchmark-results * {text-align: center;}</style>
     </head>
     <body>
         <div class="container">
             <div class="row">
                 <div class="span12">
-                    <table class="table table-striped table-hover table-bordered" id="dy-benchmark-results">
+                    <table class="table table-striped table-hover table-bordered dy-benchmark-results">
                         <thead>
                             <tr>
                                 <th colspan="3">Ach!</th>
@@ -125,5 +125,47 @@ EOD;
 
         $this->assertStringStartsWith($expected, $results);
 
+    }
+
+    /**
+     * Tests getting html fragment results
+     */
+    public function testGetHtmlFragmentResults()
+    {
+        $a = new Benchmark('ach');
+        $this->manager->addBenchmark($a);
+
+        $results = $this->manager->getResults('Ach!', Manager::FORMAT_HTML_FRAGMENT);
+
+$expected = <<<EOD
+<table class="table table-striped table-hover table-bordered" id="dy-benchmark-results">
+    <thead>
+        <tr>
+            <th colspan="3">Ach!</th>
+        </tr>
+        <tr>
+            <th>PRODUCT</th>
+            <th>TIME (s)</th>
+            <th>MEMORY (kB)</th>
+        </tr>
+    </thead>
+    <tbody>
+EOD;
+
+    }
+
+    /**
+     * Tests trying an invalid format
+     */
+    public function testGetInvalidResults()
+    {
+        $a = new Benchmark('ac');
+        $this->manager->addBenchmark($a);
+
+        try {
+            $this->manager->getResults('Bad!', 'bad');
+        } catch (\Exception $e) {
+            $this->assertEquals(true, true);
+        }
     }
 }
