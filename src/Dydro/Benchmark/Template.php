@@ -23,7 +23,7 @@ abstract class Template
      *
      * @var string
      */
-    protected $rows = array();
+    protected $rows = [];
 
     /**
      * Adds data to the table

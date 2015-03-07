@@ -56,7 +56,7 @@ class Manager
      *
      * @var Benchmark[]
      */
-    protected $benchmarks = array();
+    protected $benchmarks = [];
 
     /**
      * Add a benchmark to compare against
@@ -129,7 +129,7 @@ class Manager
     protected function calculateColors()
     {
         // initial structure of our return array
-        $return = array('time' => array(), 'memory' => array());
+        $return = ['time' => [], 'memory' => []];
 
         // short-circuit if we only have one thing to benchmark
         if (count($this->benchmarks) == 1) {
@@ -141,8 +141,8 @@ class Manager
         }
 
         // we make separate arrays since we don't want to re-order the list as it was passed in. usort would do that
-        $times = array();
-        $memories = array();
+        $times = [];
+        $memories = [];
 
         // split them all out
         /** @var Benchmark $benchmark */
